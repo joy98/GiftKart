@@ -1,0 +1,25 @@
+.login-form {
+  width: 25rem;
+  max-width: 90%;
+  margin: auto;
+  display: block;
+  padding: 1.5rem 2.5rem;
+}
+
+.signup-form {
+  width: 25rem;
+  max-width: 90%;
+  margin: auto;
+  display: block;
+  padding: 1.5rem 2.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .login-form {
+    padding: .5rem;
+  }
+
+  .signup-form {
+    padding: .5rem;
+  }
+}

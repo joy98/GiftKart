@@ -1,0 +1,65 @@
+<footer class="footer" id="footer">
+	<div class="footer-info-left">
+		<p><i class="fas fa-users"></i> Group Members:
+			<ul>
+				<li>
+					<a href="https://github.com/Ninad99">Ninad Subba</a>
+				</li>
+				<li>
+					<a href="https://github.com/joy98">Joy Sarkar</a>
+				</li>
+				<li>
+					<a href="https://github.com/AvishekGhost">Avishek Mondal</a>
+				</li>
+			</ul>
+		</p>
+	</div>
+	<div class="footer-info-right">
+		<p><strong>GiftKart</strong> | Made by Group A2G5 (IT 3rd Year, Jadavpur University)</p>
+		<a href="https://github.com/Ninad99/GiftKart"><i class="fab fa-github"></i> View Source</a>
+	</div>
+</footer>
+
+<script src="/js/main.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+	$(function () {
+		let searchBarID = "search-web";
+		autocompleteAjaxFunction(searchBarID);
+	})
+
+	$(function () {
+		let searchBarID = "search-mobile";
+		autocompleteAjaxFunction(searchBarID);
+	})
+
+	function autocompleteAjaxFunction(searchBarID) {
+		$(`#${searchBarID}`).autocomplete({
+			source: function (req, res) {
+				$.ajax({
+					url: "autocomplete/",
+					dataType: "jsonp",
+					type: "GET",
+					data: req,
+					success: function (data) {
+						res(data);
+					},
+					error: function (err) {
+						console.log(err);
+					},
+				})
+			},
+			minLength: 1,
+			select: function (event, ui) {
+				if (ui.items) {
+					$(`#${searchBarID}`).text(ui.items.label);
+					$(`#${searchBarID}`).value(ui.items.label);
+				}
+			}
+		});
+	}
+</script>
+</body>
+
+</html>

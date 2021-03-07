@@ -1,0 +1,111 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/product.css">
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/cart.css">
+</head>
+
+<body>
+  <%- include('../includes/navigation.ejs', { cartItems: cartItems }) %>
+  <main>
+    <% if (products.length > 0) { %>
+      <ul class="cart-list">
+        <% products.forEach(p => { %>
+          <li class="cart-list-item">
+            <div class="container">
+              <div class="cart-item-img">
+                <img src="<%= p.productId.imageUrl %>" alt="<%= p.productId.title %>">
+              </div>
+              <div class="cart-list-item--info">
+                <a href="/products/<%= p.productId._id %>"><h3><%= p.productId.title %></h3></a>
+                <h5>Quantity - <%= p.quantity %></h5>
+                <h4>&#8377; <%= p.productId.price * p.quantity %></h4>
+              </div>
+            </div>
+            <form action="/cart-delete-item" method="POST">
+              <input type="hidden" value="<%= p.productId._id %>" name="productId" />
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+              <button type="submit" class="btn danger">Delete</button>
+            </form>
+          </li>
+        <% }) %>
+      </ul>
+      <hr />
+      <div class="cart-flex">
+        <div class="cart-price-display">
+          <h4>Items in order:</h4>
+          <ul>
+            <% products.forEach(p => { %>
+              <li>
+                <span><%= p.productId.title %> * <%= p.quantity %> = &#8377; <%= p.productId.price * p.quantity %></span>
+              </li>
+            <% }) %>
+          </ul>
+          <h2>Cart total = &#8377; <%= totalAmount %></h2>
+        </div>
+        <form class="cart-form" action="/create-order" method="POST">
+          <p class="page-header centered"><strong>GiftKart</strong> | Place Order</p>
+          <% if (errorMessage) { %>
+            <div class="user-message user-message--error"><%= errorMessage %></div>
+          <% } %>
+          <div class="form-control">
+            <label for="name">Name</label>
+            <input
+              required
+              type="text"
+              name="name"
+              id="name"
+              class="<%= validationErrors.find(e => e.param === 'name') ? 'invalid' : '' %>"
+              value="<%= oldInput.name %>">
+          </div>
+          <div class="form-control">
+            <label for="house">Flat no./House no.</label>
+            <input 
+              required
+              type="text"
+              name="house" 
+              id="house"
+              class="<%= validationErrors.find(e => e.param === 'house') ? 'invalid' : '' %>"
+              value="<%= oldInput.house %>">
+          </div>
+          <div class="form-control">
+            <label for="street">Street/Locality</label>
+            <input 
+              required
+              type="text"
+              name="street" 
+              id="street"
+              class="<%= validationErrors.find(e => e.param === 'street') ? 'invalid' : '' %>"
+              value="<%= oldInput.street %>" >
+          </div>
+          <div class="form-control">
+            <label for="house">City</label>
+            <input 
+              required
+              type="text"
+              name="city" 
+              id="city"
+              class="<%= validationErrors.find(e => e.param === 'city') ? 'invalid' : '' %>"
+              value="<%= oldInput.city %>" >
+          </div>
+          <div class="form-control">
+            <label for="pin">PIN Code</label>
+            <input 
+              required
+              type="number"
+              name="PIN" 
+              id="PIN"
+              class="<%= validationErrors.find(e => e.param === 'PIN') ? 'invalid' : '' %>"
+              value="<%= oldInput.PIN %>" >
+          </div>
+          <input type="hidden" name="totalamount" value="<%= totalAmount %>">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+          <button class="btn" type="submit">Order Now!</button>
+        </form>
+      </div>
+    <% } else { %>
+      <div class="centered">
+        <h1>No products in cart!</h1>
+      </div>
+    <% } %>
+  </main>
+<%- include('../includes/end.ejs') %>

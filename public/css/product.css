@@ -1,0 +1,162 @@
+.main-container {
+  width: 100%;
+  position: relative;
+}
+
+.products-container {
+  display: inline-block;
+  width: 75%;
+  vertical-align: top;
+}
+
+.filter-container {
+  background-color: var(--color-text-white);
+  display: inline-block;
+  vertical-align: top;
+  position: sticky;
+  top: 7%;
+  left: 0;
+  font-size: small;
+  width: 24%;
+  padding: .75rem .5rem;
+}
+
+.product-form {
+  width: 20rem;
+  max-width: 90%;
+  margin: auto;
+  display: block;
+}
+
+.product-item {
+  width: 15.5rem;
+  max-width: 95%;
+  margin: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product__title {
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.product__price {
+  text-align: center;
+  color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.product__description {
+  text-align: center;
+}
+
+.product-detail-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.detail-image {
+  margin: 0;
+  padding: 1rem 1.5rem;
+  flex-basis: 35%;
+}
+
+.detail-image img {
+  width: 100%;
+}
+
+.detail-info {
+  text-align: left;
+  padding: 0 2rem;
+  flex-basis: 65%;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  list-style: none;
+  padding: 0;
+}
+
+.orders-list__item {
+  padding: .5rem 1rem;
+  border: 1px solid var(--color-primary-light);
+  margin: .5rem 0;
+}
+
+.order-details-container {
+  display: flex; 
+  justify-content: space-around;
+}
+
+.order-details-container .rider-list{
+  height: 70vh;
+  overflow: scroll; 
+  overflow-x: hidden;
+}
+
+.map-container{
+  height: 80vh;
+  width: 66%;
+}
+
+#map{
+  height: 100%; 
+  width: 100%;
+}
+
+.location-info-container{
+  display: flex; 
+  flex-direction: column;
+}
+
+.location-info-container-item {
+  display: flex;
+}
+
+.location-info-container-item img {
+  width: 75px;
+  height: 75px;
+}
+
+@media screen and (max-width: 768px) {
+  .products-container {
+    width: 100%;
+  }
+
+  .orders-list__item {
+    font-size: 87.5%;
+  }
+
+  .products-container {
+    display: block;
+    margin: 0;
+  }
+
+  .detail-image {
+    flex-basis: 80%;
+  }
+  
+  .detail-info {
+    flex-basis: 100%;
+    padding: 0 .75rem;
+  }
+
+  .order-details-container {
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .map-container{
+    height: 80vh;
+    width: 100%;
+  }
+}

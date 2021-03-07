@@ -1,0 +1,53 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+  <%- include('../includes/navigation.ejs', { cartItems: cartItems }) %>
+  <main>
+    <% if (orders.length === 0) { %>
+      <div class="centered">
+        <h1>No orders placed!</h1>
+      </div>
+    <% } else { %>
+      <ul class="orders-list">
+        <% orders.forEach(order => { %>
+          <li class="orders-list__item">
+            <h3>Order #<%= order._id %></h3>
+            <ul>
+              <% order.products.forEach(p => { %>
+                <li>
+                  <%= p.productData.title %> (<%= p.quantity %>)
+                </li>
+              <% }); %>
+            </ul>
+            <h4>Total amount - &#8377;<%= order.totalAmount %></h4>
+            <hr />
+            <p>
+              Order Status: 
+              <% if (order.status === 'placed') { %>
+                <strong style="color: #3F51B5;">Order placed</strong>
+              <% } else if (order.status === 'transit') { %>
+                <strong style="color: #FF9800;">In transit</strong>
+              <% } else if (order.status === 'delivered') { %>
+                <strong style="color: green;">Delivered</strong>
+              <% } else if (order.status === 'cancelled') { %>
+                <strong style="color: red;">Cancelled</strong>
+              <% } %>
+            </p>
+            <h4>Shipping address:</h4>
+            <p>
+              <strong><%= order.address.name %></strong><br />
+              <%= order.address.house %>,<br />
+              <%= order.address.street %>,<br />
+              <%= order.address.city %>,<br />
+              <%= order.address.pin %>
+            </p>
+            <h5>Placed on - <%= order.orderDate.toDateString() %> <%= order.orderDate.toTimeString() %></h5>
+          </li>
+        <% }); %>
+      </ul>
+    <% } %>
+  </main>
+
+<%- include('../includes/end.ejs') %>
